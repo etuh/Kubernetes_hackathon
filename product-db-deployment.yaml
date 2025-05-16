@@ -1,0 +1,31 @@
+# product-db-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-db
+  labels:
+    app: product-db
+spec:
+  replicas: 1 # Databases usually start with 1 replica unless specifically designed for clustering
+  selector:
+    matchLabels:
+      app: product-db
+  template:
+    metadata:
+      labels:
+        app: product-db
+    spec:
+      containers:
+      - name: db
+        image: postgres:13-alpine # Example PostgreSQL image. VERIFY THE IMAGE from hackathon page.
+        ports:
+        - containerPort: 5432 # Standard PostgreSQL port. VERIFY THIS.
+        env: # Basic environment variables for PostgreSQL initialization
+        - name: POSTGRES_USER
+          value: "widgetarioadmin" # Example value. VERIFY IF SPECIFIC USER IS NEEDED.
+        - name: POSTGRES_PASSWORD
+          value: "SuperSecret123" # Example value. Part 2 will secure this. VERIFY.
+        - name: POSTGRES_DB
+          value: "widgetariodb" # Example database name. VERIFY.
+        # For a real setup, you'd add volumeMounts and volumes for data persistence.
+        # This basic setup will lose data if the pod restarts.

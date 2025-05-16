@@ -1,0 +1,22 @@
+# stock-api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-api
+  labels:
+    app: stock-api
+spec:
+  replicas: 2 # <-- VERIFY THIS VALUE from hackathon page
+  selector:
+    matchLabels:
+      app: stock-api
+  template:
+    metadata:
+      labels:
+        app: stock-api
+    spec:
+      containers:
+      - name: api
+        image: courselabs/widgetario-stock-api:latest # <-- VERIFY THIS IMAGE AND TAG from hackathon page
+        ports:
+        - containerPort: 8080 # <-- VERIFY THIS CONTAINER PORT from hackathon page

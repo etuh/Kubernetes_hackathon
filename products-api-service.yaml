@@ -1,0 +1,15 @@
+# products-api-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-api # DNS name for web component or other services to use
+  labels:
+    app: products-api
+spec:
+  type: ClusterIP # Default type, only reachable within the cluster
+  selector:
+    app: products-api # Matches the labels of the Pods in products-api-deployment
+  ports:
+  - protocol: TCP
+    port: 80 # Port the service will be available on (e.g., web app calls http://products-api:80)
+    targetPort: 8080 # Port on the Pods (must match containerPort in deployment) <-- VERIFY THIS

@@ -1,0 +1,15 @@
+# product-db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-db # DNS name for APIs to connect to the database
+  labels:
+    app: product-db
+spec:
+  type: ClusterIP
+  selector:
+    app: product-db # Matches the labels of the Pods in product-db-deployment
+  ports:
+  - protocol: TCP
+    port: 5432 # Service port, standard PostgreSQL port
+    targetPort: 5432 # Port on the Pods (must match containerPort in deployment)

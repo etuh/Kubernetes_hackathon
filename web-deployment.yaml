@@ -1,0 +1,22 @@
+# web-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: widgetario-web
+  labels:
+    app: widgetario-web
+spec:
+  replicas: 2 # <-- VERIFY THIS VALUE from hackathon page
+  selector:
+    matchLabels:
+      app: widgetario-web
+  template:
+    metadata:
+      labels:
+        app: widgetario-web
+    spec:
+      containers:
+      - name: web
+        image: courselabs/widgetario-web:latest # <-- VERIFY THIS IMAGE AND TAG from hackathon page
+        ports:
+        - containerPort: 80 # <-- VERIFY THIS CONTAINER PORT from hackathon page

@@ -1,0 +1,22 @@
+# products-api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-api
+  labels:
+    app: products-api
+spec:
+  replicas: 2 # <-- VERIFY THIS VALUE from hackathon page
+  selector:
+    matchLabels:
+      app: products-api
+  template:
+    metadata:
+      labels:
+        app: products-api
+    spec:
+      containers:
+      - name: api
+        image: courselabs/widgetario-products-api:latest # <-- VERIFY THIS IMAGE AND TAG from hackathon page
+        ports:
+        - containerPort: 8080 # <-- VERIFY THIS CONTAINER PORT from hackathon page
